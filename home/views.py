@@ -1,8 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 
 # Create your views here.
 def homeView(request):
-    print(request)
-    return HttpResponse("<h1>Hola Mundo!!!</h1>")
+
+    context = {
+        'page_title': 'Dashboard',
+    }
+
+    return render(request, 'home.html', context)
