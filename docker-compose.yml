@@ -1,0 +1,20 @@
+name: hector-course-postgres
+
+services:
+  postgres:
+    image: postgres
+    container_name: hector-postgres-container
+    ports:
+      - "5432:5432"
+    # environment:
+    #   POSTGRES_DB: postgres
+    #   POSTGRES_USER: postgres
+    #   POSTGRES_PASSWORD: postgres
+    env_file:
+      - .env
+    restart: unless-stopped
+    volumes:
+      - hector_postgres_data:/var/lib/postgresql/data
+    
+volumes:
+  hector_postgres_data:
