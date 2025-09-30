@@ -12,3 +12,6 @@ migrations/
 *.log
 coverage
 extras/
+._*
+._*.py
+
