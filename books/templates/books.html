@@ -15,12 +15,12 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="card mb-4">
+        <div class="card card-primary card-outline mb-4">
             <div class="card-header"><h3 class="card-title">Books Table</h3></div>
             <!-- /.card-header -->
             <div class="card-body">
-            <table class="table table-bordered" role="table">
-                <thead>
+            <table class="table table-bordered table-striped" role="table">
+                <thead class="table-dark">
                 <tr>
                     <th style="width: 10px" scope="col">#</th>
                     <th scope="col">Book Title</th>
@@ -31,46 +31,21 @@
                 </tr>
                 </thead>
                 <tbody>
+                {% for book in books %}
                 <tr class="align-middle">
-                    <td>1.</td>
-                    <td>Update software</td>
+                    <td>{{ book.id }}.</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.publisher }}</td>
+                    <td>{{ book.published_date.year }}</td>
                     <td>
-                    <div class="progress progress-xs">
-                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                    </div>
+                        <div class="btn-group btn-group-sm" role="group">
+                            <a href="{% url 'book-update-view' pk=book.pk %}" class="btn btn-outline-primary"><i class="bi bi-pencil"></i></a>
+                            <a href="#" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a>
+                        </div>
                     </td>
-                    <td><span class="badge text-bg-danger">55%</span></td>
                 </tr>
-                <tr class="align-middle">
-                    <td>2.</td>
-                    <td>Clean database</td>
-                    <td>
-                    <div class="progress progress-xs">
-                        <div class="progress-bar text-bg-warning" style="width: 70%"></div>
-                    </div>
-                    </td>
-                    <td><span class="badge text-bg-warning">70%</span></td>
-                </tr>
-                <tr class="align-middle">
-                    <td>3.</td>
-                    <td>Cron job running</td>
-                    <td>
-                    <div class="progress progress-xs progress-striped active">
-                        <div class="progress-bar text-bg-primary" style="width: 30%"></div>
-                    </div>
-                    </td>
-                    <td><span class="badge text-bg-primary">30%</span></td>
-                </tr>
-                <tr class="align-middle">
-                    <td>4.</td>
-                    <td>Fix and squish bugs</td>
-                    <td>
-                    <div class="progress progress-xs progress-striped active">
-                        <div class="progress-bar text-bg-success" style="width: 90%"></div>
-                    </div>
-                    </td>
-                    <td><span class="badge text-bg-success">90%</span></td>
-                </tr>
+                {% endfor %}
                 </tbody>
             </table>
             </div>
