@@ -18,3 +18,15 @@ def books_view(request):
     }
 
     return render(request, "books.html" , context)
+
+
+def book_create_view(request):
+
+    context = {
+        'title': 'Create Book',
+        'entity': 'Books',
+        'page_name': 'Create a new Book',
+        'url_list': reverse('books-view'),
+    }
+
+    return render(request, "create.html" , context)

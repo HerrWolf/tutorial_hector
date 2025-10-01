@@ -1,14 +1,16 @@
-{% extends "layout/base.html" %} {% load static %} 
+{% extends "layout/base.html" %} 
+
+{% load static %} 
 
 {% block content %}
 
 <div class="row mb-4">
     <p class="d-inline-flex gap-1">
-        <button class="btn btn-outline-primary" type="button">
-          <i class="bi bi-plus-lg"></i>
+        <a class="btn btn-outline-primary" href="{% url 'book-create-view' %}">
+          <i class="bi bi-plus-lg me-1"></i>
           Add New
-        </button>
-      </p>
+        </a>
+    </p>
 </div>
 
 <div class="row">
