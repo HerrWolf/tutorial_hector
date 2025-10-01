@@ -5,7 +5,6 @@ from .forms import BookForm
 
 
 def books_view(request):
-
     books = Book.objects.order_by('-id')
 
     context = {
@@ -17,7 +16,6 @@ def books_view(request):
     }
 
     return render(request, "books.html" , context)
-
 
 def book_create_view(request):
     if request.method == 'POST':
@@ -57,3 +55,19 @@ def book_update_view(request, pk):
     }
 
     return render(request, "create.html" , context)
+
+def book_delete_view(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    if request.method == 'POST':
+        book.delete()
+        return redirect('books-view')
+
+    context = {
+        'title': 'Delete Book',
+        'entity': 'Books',
+        'page_name': 'Delete Book',
+        'url_list': reverse('books-view'),
+        'book': book,
+    }
+
+    return render(request, "delete.html" , context)

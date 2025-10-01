@@ -1,0 +1,31 @@
+{% extends "layout/base.html" %} 
+
+{% load static %} 
+
+{% block content %}
+
+<div class="container d-flex flex-column justify-content-center align-items-center">
+  <div class="row justify-content-center w-100">
+    <div class="col-md-6">
+      <form method="post">
+        {% csrf_token %}
+        <div class="card card-success card-outline mb-4">
+              <!--begin::Header-->
+              <div class="card-header"><div class="card-title">Are you sure?</div></div>
+              <!--end::Header-->
+              <!--begin::Body-->
+              <div class="card-body">
+                  <p class="mb-4">Do you really want to delete the book: <strong>{{ book.title }}</strong>? This process cannot be undone.</p>
+              </div>
+              <!--end::Body-->
+              <div class="card-footer">
+                  <a href="{% url 'books-view' %}" class="btn btn-outline-success me-2">No, Cancel</a>
+                  <button type="submit" class="btn btn-danger">Yes, Delete</button>
+              </div>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
