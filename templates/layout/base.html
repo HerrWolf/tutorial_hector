@@ -95,6 +95,16 @@
 
       <!--begin::App Main-->
       <main class="app-main">
+        {% if messages %}
+        <div style="position: fixed; top: 1rem; right: 1rem; z-index: 1050;">
+            {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
         <!--begin::App Content Header-->
         <div class="app-content-header">
           <!--begin::Container-->
@@ -371,6 +381,16 @@
         option_sparkline3
       );
       sparkline3.render();
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        setTimeout(function() {
+            let alerts = document.querySelectorAll('.alert-success');
+            alerts.forEach(function(alert) {
+                new bootstrap.Alert(alert).close();
+            });
+        }, 3000);
+    });
     </script>
     <!--end::Script-->
   </body>

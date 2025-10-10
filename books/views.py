@@ -17,11 +17,15 @@ def books_view(request):
 
     return render(request, "books.html" , context)
 
+from django.contrib import messages
+
+
 def book_create_view(request):
     if request.method == 'POST':
         form = BookForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Book created successfully.')
             return redirect('books-view')
     else:
         form = BookForm()
@@ -42,6 +46,7 @@ def book_update_view(request, pk):
         form = BookForm(request.POST, instance=book)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Book updated successfully.')
             return redirect('books-view')
     else:
         form = BookForm(instance=book)
@@ -60,6 +65,7 @@ def book_delete_view(request, pk):
     book = get_object_or_404(Book, pk=pk)
     if request.method == 'POST':
         book.delete()
+        messages.error(request, 'Book deleted successfully.')
         return redirect('books-view')
 
     context = {
