@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from .models import Book
 from .forms import BookForm
+from faker import Faker
 
 
 def books_view(request):
@@ -77,3 +78,18 @@ def book_delete_view(request, pk):
     }
 
     return render(request, "delete.html" , context)
+
+
+def book_bulk_create_view(request):
+    fake = Faker()
+    books = []
+    for _ in range(100):
+        books.append(Book(
+            title=fake.catch_phrase(),
+            author=fake.name(),
+            publisher=fake.company(),
+            published_date=fake.date_this_decade(),
+        ))
+    Book.objects.bulk_create(books)
+    messages.success(request, '100 books created successfully.')
+    return redirect('books-view')
