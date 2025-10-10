@@ -3,17 +3,22 @@ from django.urls import reverse
 from .models import Book
 from .forms import BookForm
 from faker import Faker
+from django.core.paginator import Paginator
 
 
 def books_view(request):
-    books = Book.objects.order_by('-id')
+    books_list = Book.objects.order_by('-id')
+    paginator = Paginator(books_list, 10)  # Show 10 books per page.
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     context = {
         'title': 'Books',
         'entity': 'Books',
         'page_name': 'List of Books',
         'url_list': reverse('books-view'),
-        'books': books,
+        'books': page_obj,
     }
 
     return render(request, "books.html" , context)

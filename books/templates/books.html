@@ -51,13 +51,25 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer clearfix">
-            <ul class="pagination pagination-sm m-0 float-end">
-                <li class="page-item"><a class="page-link" href="#">«</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">»</a></li>
-            </ul>
+                <ul class="pagination pagination-sm m-0 float-end">
+                    {% if books.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page=1">«</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ books.previous_page_number }}">‹</a></li>
+                    {% endif %}
+
+                    {% for num in books.paginator.page_range %}
+                        {% if books.number == num %}
+                            <li class="page-item active"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if books.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ books.next_page_number }}">›</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ books.paginator.num_pages }}">»</a></li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
         <!-- /.card -->
