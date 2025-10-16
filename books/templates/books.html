@@ -5,10 +5,14 @@
 {% block content %}
 
 <div class="row mb-4">
-    <p class="d-inline-flex gap-1">
+    <p class="d-inline-flex gap-2">
         <a class="btn btn-outline-primary" href="{% url 'book-create-view' %}">
           <i class="bi bi-plus-lg me-1"></i>
           Add New
+        </a>
+        <a class="btn btn-outline-success" href="{% url 'book-bulk-create-view' %}">
+          <i class="bi bi-plus-lg me-1"></i>
+          Bulk Create
         </a>
     </p>
 </div>

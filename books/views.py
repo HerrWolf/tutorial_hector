@@ -87,6 +87,7 @@ def book_delete_view(request, pk):
 
     return render(request, "delete.html" , context)
 
+@login_required
 def book_bulk_create_view(request):
     fake = Faker()
     books = []

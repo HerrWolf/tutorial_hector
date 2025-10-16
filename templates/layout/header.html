@@ -162,7 +162,7 @@
       <li class="nav-item dropdown user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
           <img
-            src="{% static 'assets/img/user2-160x160.jpg' %}"
+            src="{{ request.user.get_image }}"
             class="user-image rounded-circle shadow"
             alt="User Image"
           />
@@ -172,13 +172,13 @@
           <!--begin::User Image-->
           <li class="user-header text-bg-primary">
             <img
-              src="{% static 'assets/img/user2-160x160.jpg' %}"
+              src="{{ request.user.get_image }}"
               class="rounded-circle shadow"
               alt="User Image"
             />
             <p>
-              Alexander Pierce - Web Developer
-              <small>Member since Nov. 2023</small>
+              {{ request.user.fullname }} - Web Developer
+              <small>Member since {{ request.user.date_joined|date:"M. Y" }}</small>
             </p>
           </li>
           <!--end::User Image-->
