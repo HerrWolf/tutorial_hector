@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from .models import Book
 from .forms import BookForm
@@ -7,6 +8,7 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 
 
+@login_required
 def books_view(request):
     books_list = Book.objects.order_by('-id')
     paginator = Paginator(books_list, 10)  # Show 10 books per page.
@@ -24,6 +26,7 @@ def books_view(request):
 
     return render(request, "books.html" , context)
 
+@login_required
 def book_create_view(request):
     if request.method == 'POST':
         form = BookForm(request.POST)
@@ -44,6 +47,7 @@ def book_create_view(request):
 
     return render(request, "create.html" , context)
 
+@login_required
 def book_update_view(request, pk):
     book = get_object_or_404(Book, pk=pk)
     if request.method == 'POST':
@@ -65,6 +69,7 @@ def book_update_view(request, pk):
 
     return render(request, "create.html" , context)
 
+@login_required
 def book_delete_view(request, pk):
     book = get_object_or_404(Book, pk=pk)
     if request.method == 'POST':
