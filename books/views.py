@@ -4,6 +4,7 @@ from .models import Book
 from .forms import BookForm
 from faker import Faker
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 
 def books_view(request):
@@ -22,9 +23,6 @@ def books_view(request):
     }
 
     return render(request, "books.html" , context)
-
-from django.contrib import messages
-
 
 def book_create_view(request):
     if request.method == 'POST':
@@ -83,7 +81,6 @@ def book_delete_view(request, pk):
     }
 
     return render(request, "delete.html" , context)
-
 
 def book_bulk_create_view(request):
     fake = Faker()
